@@ -141,7 +141,12 @@ function editProduct(productId) {
 }
 
 function deleteProduct(productId) {
-    // Delete product logic
+    if (confirm('Are you sure you want to delete this product?')) {
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        const updatedProducts = products.filter(product => product.id !== productId);
+        localStorage.setItem('products', JSON.stringify(updatedProducts));
+        renderProducts();
+    }
 }
 
 function filterProducts() {
