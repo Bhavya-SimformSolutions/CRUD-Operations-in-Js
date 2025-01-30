@@ -121,19 +121,21 @@ function renderProducts() {
     products.forEach(product => {
         const productItem = document.createElement('li');
         productItem.innerHTML = `
-            <div>
-                <img src="${product.image}" alt="${product.name}" style="width: 100px; height: 100px;">
-                <h3>${product.name}</h3>
-                <p>Price: $${product.price}</p>
-                <p>${product.description}</p>
-            </div>
-            <div>
-                <button onclick="editProduct('${product.id}')">Edit</button>
-                <button onclick="deleteProduct('${product.id}')">Delete</button>
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>Price: $${product.price}</p>
+            <p>${product.description}</p>
+            <div class="buttons">
+                <button onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
+                <button class="delete" onclick="deleteProduct('${product.id}')"><i class="fas fa-trash"></i></button>
             </div>
         `;
         productsList.appendChild(productItem);
     });
+}
+
+function showDescription(description) {
+    alert(description);
 }
 
 function editProduct(productId) {
