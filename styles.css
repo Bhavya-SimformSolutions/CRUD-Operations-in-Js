@@ -1,0 +1,66 @@
+#product-list button {
+    margin-bottom: 1rem;
+}
+
+#products li {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5rem;
+    border-bottom: 1px solid #ccc;
+}
+
+#products li div {
+    display: flex;
+    flex-direction: column;
+}
+
+#products li img {
+    margin-bottom: 0.5rem;
+}
+
+#products li button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 0.5rem;
+}
+
+#products li button:hover {
+    background-color: #45a049;
+}
+#product-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#product-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+#product-form label {
+    margin-top: 1rem;
+}
+
+#product-form input,
+#product-form textarea {
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+#product-form button {
+    margin-top: 1rem;
+    padding: 0.5rem;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#product-form button:hover {
+    background-color: #45a049;
+}

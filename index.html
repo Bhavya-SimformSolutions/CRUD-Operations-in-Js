@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Product Management System</h1>
+    </header>
+    <main>
+        <section id="product-list">
+            <h2>Product List</h2>
+            <button id="addProductBtn">Add Product</button>
+            <div id="filters">
+                <input type="text" id="filterId" placeholder="Filter by Product ID">
+                <button onclick="filterProducts()">Filter</button>
+                
+                <select id="sortOptions" onchange="sortProducts()">
+                    <option value="productId">Sort by Product ID</option>
+                    <option value="productName">Sort by Product Name</option>
+                    <option value="price">Sort by Price</option>
+                </select>
+            </div>
+            <ul id="products"></ul>
+        </section>
+    </main>
+    <script src="app.js"></script>
+</body>
+</html>
