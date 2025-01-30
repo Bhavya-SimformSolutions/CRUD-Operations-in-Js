@@ -6,7 +6,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const form = document.getElementById('form');
     if (form) {
-        form.addEventListener('submit', saveProduct);
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+        if (productId) {
+            populateEditForm(productId);
+            form.addEventListener('submit', (event) => updateProduct(event, productId));
+        } else {
+            form.addEventListener('submit', saveProduct);
+        }
     }
 
     const addProductBtn = document.getElementById('addProductBtn');
@@ -17,7 +24,57 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-//called when new product is added
+function populateEditForm(productId) {
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const product = products.find(p => p.id === productId);
+
+    if (product) {
+        document.getElementById('name').value = product.name;
+        document.getElementById('price').value = product.price;
+        document.getElementById('description').value = product.description;
+        document.getElementById('currentImage').src = product.image;
+    }
+}
+
+function updateProduct(event, productId) {
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const price = document.getElementById('price').value;
+    const imageInput = document.getElementById('image');
+    const description = document.getElementById('description').value;
+
+    if (!name || !price || !description) {
+        alert('Name, price, and description are required!');
+        return;
+    }
+
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const productIndex = products.findIndex(p => p.id === productId);
+
+    if (productIndex !== -1) {
+        const product = products[productIndex];
+        product.name = name;
+        product.price = price;
+        product.description = description;
+
+        if (imageInput.files.length > 0) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                product.image = event.target.result;
+                products[productIndex] = product;
+                localStorage.setItem('products', JSON.stringify(products));
+                window.location.href = 'index.html';
+            };
+            reader.readAsDataURL(imageInput.files[0]);
+        } else {
+            products[productIndex] = product;
+            localStorage.setItem('products', JSON.stringify(products));
+            window.location.href = 'index.html';
+        }
+    }
+}
+
 function saveProduct(event) {
     event.preventDefault();
     
@@ -30,7 +87,7 @@ function saveProduct(event) {
         alert('All fields are required!');
         return;
     }
-    //a FileReader to read the selected image file and convert it to a base64 string.
+
     const reader = new FileReader();
     reader.onload = function(event) {
         const imageBase64 = event.target.result;

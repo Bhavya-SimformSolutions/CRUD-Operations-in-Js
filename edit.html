@@ -14,6 +14,20 @@
         <section id="product-form">
             <h2>Edit Product</h2>
             <form id="form">
+                <label for="name">Product Name:</label>
+                <input type="text" id="name" name="name" required>
+                
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" required>
+                
+                <label for="image">Image:</label>
+                <img id="currentImage" src="" alt="Current Image" style="width: 100px; height: 100px; display: block; margin-bottom: 10px;">
+                <input type="file" id="image" name="image" accept="image/*">
+                
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required></textarea>
+                
+                <button type="submit">Update Product</button>
             </form>
         </section>
     </main>
