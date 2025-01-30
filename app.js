@@ -19,7 +19,37 @@ document.addEventListener('DOMContentLoaded', () => {
 
 //called when new product is added
 function saveProduct(event) {
-   
+    event.preventDefault();
+    
+    const name = document.getElementById('name').value;
+    const price = document.getElementById('price').value;
+    const imageInput = document.getElementById('image');
+    const description = document.getElementById('description').value;
+
+    if (!name || !price || !imageInput.files.length || !description) {
+        alert('All fields are required!');
+        return;
+    }
+    //a FileReader to read the selected image file and convert it to a base64 string.
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const imageBase64 = event.target.result;
+
+        const products = JSON.parse(localStorage.getItem('products')) || [];
+        const newProduct = {
+            id: Date.now().toString(),
+            name,
+            price,
+            image: imageBase64,
+            description
+        };
+
+        products.push(newProduct);
+        localStorage.setItem('products', JSON.stringify(products));
+
+        window.location.href = 'index.html';
+    };
+    reader.readAsDataURL(imageInput.files[0]);
 }
 
 function loadFromLocalStorage() {
