@@ -1,6 +1,16 @@
 import { getProductsFromLocalStorage } from './storage.js';
 import { deleteProduct, populateEditForm } from './product.js';
 
+/**
+ * Renders a list of products to the DOM.
+ *
+ * @param {Array} [products=getProductsFromLocalStorage()] - An array of product objects to render. If not provided, defaults to the products retrieved from local storage.
+ * @param {string} products[].id - The unique identifier of the product.
+ * @param {string} products[].name - The name of the product.
+ * @param {string} products[].image - The URL of the product's image.
+ * @param {number} products[].price - The price of the product.
+ * @param {string} products[].description - The description of the product.
+ */
 export function renderProducts(products = getProductsFromLocalStorage()) {
     const productsList = document.getElementById('products');
     productsList.innerHTML = '';
@@ -22,6 +32,16 @@ export function renderProducts(products = getProductsFromLocalStorage()) {
     });
 }
 
+/**
+ * Renders a list of filtered products to the DOM.
+ *
+ * @param {Array} filteredProducts - An array of product objects to be rendered.
+ * @param {Object} filteredProducts[].id - The unique identifier of the product.
+ * @param {Object} filteredProducts[].name - The name of the product.
+ * @param {Object} filteredProducts[].image - The URL of the product image.
+ * @param {Object} filteredProducts[].price - The price of the product.
+ * @param {Object} filteredProducts[].description - The description of the product.
+ */
 export function renderFilteredProducts(filteredProducts) {
     const productsList = document.getElementById('products');
     productsList.innerHTML = '';
@@ -43,6 +63,11 @@ export function renderFilteredProducts(filteredProducts) {
     });
 }
 
+/**
+ * Filters products based on the input value of the element with id 'filterId'.
+ * Retrieves products from local storage and filters them by checking if their id includes the filterId value.
+ * Renders the filtered products.
+ */
 export function filterProducts() {
     const filterId = document.getElementById('filterId').value.trim();
     const products = getProductsFromLocalStorage();
@@ -50,6 +75,13 @@ export function filterProducts() {
     renderFilteredProducts(filteredProducts);
 }
 
+/**
+ * Sorts the products based on the selected sort option and renders the sorted products.
+ * The sort options can be 'productId', 'productName', or 'price'.
+ * - 'productId': Sorts products by their ID in lexicographical order.
+ * - 'productName': Sorts products by their name in lexicographical order.
+ * - 'price': Sorts products by their price in ascending order.
+ */
 export function sortProducts() {
     const sortOption = document.getElementById('sortOptions').value;
     const products = getProductsFromLocalStorage();
@@ -65,6 +97,15 @@ export function sortProducts() {
     renderProducts(products);
 }
 
+/**
+ * Validates the product form fields.
+ *
+ * @param {string} name - The name of the product.
+ * @param {number} price - The price of the product.
+ * @param {HTMLInputElement} imageInput - The file input element for the product image.
+ * @param {string} description - The description of the product.
+ * @returns {boolean} - Returns true if the form is valid, otherwise false.
+ */
 export function validateProductForm(name, price, imageInput, description) {
     let isValid = true;
 

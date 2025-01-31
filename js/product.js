@@ -1,10 +1,19 @@
 import { getProductsFromLocalStorage, saveProductsToLocalStorage } from './storage.js';
 import { renderProducts, validateProductForm } from './utils.js';
 
+/**
+ * Loads products from local storage and renders them.
+ */
 export function loadFromLocalStorage() {
     renderProducts();
 }
 
+/**
+ * Saves a product to local storage and redirects to the index page.
+ * 
+ * @param {Event} event - The event object from the form submission.
+ * @returns {void}
+ */
 export function saveProduct(event) {
     event.preventDefault();
     
@@ -38,6 +47,12 @@ export function saveProduct(event) {
     reader.readAsDataURL(imageInput.files[0]);
 }
 
+/**
+ * Updates a product with the given productId based on the form inputs.
+ *
+ * @param {Event} event - The event object.
+ * @param {number} productId - The ID of the product to update.
+ */
 export function updateProduct(event, productId) {
     event.preventDefault();
     
@@ -76,6 +91,11 @@ export function updateProduct(event, productId) {
     }
 }
 
+/**
+ * Deletes a product from the local storage and updates the product list.
+ *
+ * @param {number} productId - The ID of the product to be deleted.
+ */
 export function deleteProduct(productId) {
     if (confirm('Are you sure you want to delete this product?')) {
         const products = getProductsFromLocalStorage();
@@ -85,6 +105,11 @@ export function deleteProduct(productId) {
     }
 }
 
+/**
+ * Populates the edit form with the details of the product with the given ID.
+ *
+ * @param {string} productId - The ID of the product to be edited.
+ */
 export function populateEditForm(productId) {
     const products = getProductsFromLocalStorage();
     const product = products.find(p => p.id === productId);
