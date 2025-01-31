@@ -22,6 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
             window.location.href = 'add.html';
         });
     }
+
+    const sortOptions = document.getElementById('sortOptions');
+    if (sortOptions) {
+        sortOptions.addEventListener('change', sortProducts);
+    }
 });
 
 function populateEditForm(productId) {
@@ -124,7 +129,7 @@ function renderProducts() {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>ID: ${product.id}</p>
-            <p>Price: $${product.price}</p>
+            <p>Price: Rs.${product.price}</p>
             <p>${product.description}</p>
             <div class="buttons">
                 <button onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
@@ -145,7 +150,7 @@ function renderFilteredProducts(filteredProducts) {
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>ID: ${product.id}</p>
-            <p>Price: $${product.price}</p>
+            <p>Price: Rs.${product.price}</p>
             <p>${product.description}</p>
             <div class="buttons">
                 <button onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
@@ -177,5 +182,37 @@ function deleteProduct(productId) {
 }
 
 function sortProducts() {
-    // Sort products logic
+    const sortOption = document.getElementById('sortOptions').value;
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+
+    if (sortOption === 'productId') {
+        products.sort((a, b) => a.id.localeCompare(b.id));
+    } else if (sortOption === 'productName') {
+        products.sort((a, b) => a.name.localeCompare(b.name));
+    } else if (sortOption === 'price') {
+        products.sort((a, b) => a.price - b.price);
+    }
+
+    renderSortedProducts(products);
+}
+
+function renderSortedProducts(sortedProducts) {
+    const productsList = document.getElementById('products');
+    productsList.innerHTML = '';
+
+    sortedProducts.forEach(product => {
+        const productItem = document.createElement('li');
+        productItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>ID: ${product.id}</p>
+            <p>Price: Rs.${product.price}</p>
+            <p>${product.description}</p>
+            <div class="buttons">
+                <button onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
+                <button class="delete" onclick="deleteProduct('${product.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+        `;
+        productsList.appendChild(productItem);
+    });
 }
