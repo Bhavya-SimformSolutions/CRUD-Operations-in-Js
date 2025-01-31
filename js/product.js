@@ -1,5 +1,5 @@
 import { getProductsFromLocalStorage, saveProductsToLocalStorage } from './storage.js';
-import { renderProducts } from './utils.js';
+import { renderProducts, validateProductForm } from './utils.js';
 
 export function loadFromLocalStorage() {
     renderProducts();
@@ -13,8 +13,7 @@ export function saveProduct(event) {
     const imageInput = document.getElementById('image');
     const description = document.getElementById('description').value;
 
-    if (!name || !price || !imageInput.files.length || !description) {
-        alert('All fields are required!');
+    if (!validateProductForm(name, price, imageInput, description)) {
         return;
     }
 
@@ -47,8 +46,7 @@ export function updateProduct(event, productId) {
     const imageInput = document.getElementById('image');
     const description = document.getElementById('description').value;
 
-    if (!name || !price || !description) {
-        alert('Name, price, and description are required!');
+    if (!validateProductForm(name, price, null, description)) {
         return;
     }
 
