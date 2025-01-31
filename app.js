@@ -123,6 +123,7 @@ function renderProducts() {
         productItem.innerHTML = `
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
+            <p>ID: ${product.id}</p>
             <p>Price: $${product.price}</p>
             <p>${product.description}</p>
             <div class="buttons">
@@ -134,8 +135,32 @@ function renderProducts() {
     });
 }
 
-function showDescription(description) {
-    alert(description);
+function renderFilteredProducts(filteredProducts) {
+    const productsList = document.getElementById('products');
+    productsList.innerHTML = '';
+
+    filteredProducts.forEach(product => {
+        const productItem = document.createElement('li');
+        productItem.innerHTML = `
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>ID: ${product.id}</p>
+            <p>Price: $${product.price}</p>
+            <p>${product.description}</p>
+            <div class="buttons">
+                <button onclick="editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
+                <button class="delete" onclick="deleteProduct('${product.id}')"><i class="fas fa-trash"></i></button>
+            </div>
+        `;
+        productsList.appendChild(productItem);
+    });
+}
+
+function filterProducts() {
+    const filterId = document.getElementById('filterId').value.trim();
+    const products = JSON.parse(localStorage.getItem('products')) || [];
+    const filteredProducts = products.filter(product => product.id.includes(filterId));
+    renderFilteredProducts(filteredProducts);
 }
 
 function editProduct(productId) {
@@ -149,10 +174,6 @@ function deleteProduct(productId) {
         localStorage.setItem('products', JSON.stringify(updatedProducts));
         renderProducts();
     }
-}
-
-function filterProducts() {
-    // Filter products logic
 }
 
 function sortProducts() {
