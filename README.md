@@ -4,6 +4,9 @@
 
 This application enables users to create, update, view, and manage products. It uses localStorage for storing product data and provides a simple interface for managing products.
 
+## Live Demo
+https://bhavya-simformsolutions.github.io/CRUD-Operations-in-Js/
+
 ## Features
 
 - **Products List**: Displays a list of all products.
@@ -15,13 +18,14 @@ This application enables users to create, update, view, and manage products. It 
 - **Sort Products**: Sorts products by ID, name, or price.
 - **Confirmation Messages**: Displays confirmation messages for add, edit, and delete actions.
 - **Form Validation**: Validates the product form fields to ensure all required fields are filled and the image size is within the limit.
+- **Responsive Design**: The UI is responsive for all device dimensions
 
 ## File Structure
 
 - **index.html** :- Main page displaying the list of products 
 - **add.html** :- Form page for adding new products
 - **edit.html** :- Form page for updating existing products 
-- **css /styles.css** :- CSS styles for the application 
+- **css / styles.css** :- CSS styles for the application 
 - **js / main.js** :- Main JavaScript file for handling events and routing       
 - **js / product.js** :- JavaScript file for product-related operations (add, edit, delete) 
 - **js / storage.js** :- JavaScript file for handling localStorage operations 
