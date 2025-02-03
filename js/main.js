@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
         sortOptions.addEventListener('change', sortProducts);
     }
 
+    const filterInput = document.getElementById('filterId');
+    if (filterInput) {
+        filterInput.addEventListener('input', filterProducts);
+    }
+
     // Attach functions to the window object
     window.populateEditForm = populateEditForm;
     window.deleteProduct = deleteProduct;

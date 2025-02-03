@@ -29,8 +29,9 @@ main {
 }
 
 #addProductBtn {
-    display: block;
-    margin: 0 auto 1rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 0.5rem 1rem;
     background-color: #4CAF50;
     color: white;
@@ -51,34 +52,51 @@ main {
 #filters {
     display: flex;
     justify-content: center;
-    gap: 0.5rem;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
     margin-bottom: 1rem;
 }
 
-#filters input,
-#filters select,
-#filters button {
+#filters input {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 250px; /* Adjusted width for the filter search bar */
+}
+
+#filters select {
     padding: 0.5rem;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
 #filters button {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     background-color: #4CAF50;
     color: white;
     border: none;
     cursor: pointer;
-}
-
-#filters button i {
-    margin-right: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1rem;
 }
 
 #filters button:hover {
     background-color: #45a049;
+}
+
+@media (max-width: 768px) {
+    #filters {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    #filters input,
+    #filters select,
+    #filters button {
+        width: 100%;
+    }
 }
 
 /* Product Grid Styles */
@@ -165,6 +183,10 @@ main {
 #product-form {
     max-width: 600px;
     margin: 0 auto;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 #product-form form {
@@ -174,12 +196,19 @@ main {
 
 #product-form label {
     margin-top: 1rem;
+    font-weight: bold;
 }
 
 #product-form input,
 #product-form textarea {
     padding: 0.5rem;
     margin-top: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#product-form input[type="file"] {
+    padding: 0.3rem;
 }
 
 #product-form button {
@@ -194,4 +223,11 @@ main {
 
 #product-form button:hover {
     background-color: #45a049;
+}
+
+.error-message {
+    color: red;
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+    display: block;
 }

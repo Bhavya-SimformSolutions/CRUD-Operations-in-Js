@@ -14,15 +14,15 @@
     <main>
         <section id="product-list">
             <h2>Product List</h2>
-            <button id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
             <div id="filters">
-                <input type="text" id="filterId" placeholder="Filter by Product ID">
-                <button onclick="filterProducts()"><i class="fas fa-filter"></i> Filter</button>
+                <input type="text" id="filterId" placeholder="Filter by Product ID...">
                 <select id="sortOptions" onchange="sortProducts()">
+                    <option value="">Sort by</option>
                     <option value="productId">Sort by Product ID</option>
                     <option value="productName">Sort by Product Name</option>
                     <option value="price">Sort by Price</option>
                 </select>
+                <button id="addProductBtn"><i class="fas fa-plus"></i> Add Product</button>
             </div>
             <ul id="products"></ul>
         </section>
