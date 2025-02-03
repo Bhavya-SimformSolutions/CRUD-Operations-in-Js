@@ -9,7 +9,7 @@ export function loadFromLocalStorage() {
 }
 
 /**
- * Saves a product to local storage and redirects to the index page.
+ * Saves a product to local storage.
  * 
  * @param {Event} event - The event object from the form submission.
  * @returns {void}
@@ -42,16 +42,18 @@ export function saveProduct(event) {
         products.push(newProduct);
         saveProductsToLocalStorage(products);
 
+        localStorage.setItem('confirmationMessage', 'Product added successfully!');
+        localStorage.setItem('confirmationMessageType', 'success');
         window.location.href = 'index.html';
     };
     reader.readAsDataURL(imageInput.files[0]);
 }
 
 /**
- * Updates a product with the given productId based on the form inputs.
- *
- * @param {Event} event - The event object.
- * @param {number} productId - The ID of the product to update.
+ * Updates a product with the given productId based on the form input values.
+ * 
+ * @param {Event} event - The event object from the form submission.
+ * @param {number} productId - The ID of the product to be updated.
  */
 export function updateProduct(event, productId) {
     event.preventDefault();
@@ -80,35 +82,47 @@ export function updateProduct(event, productId) {
                 product.image = event.target.result;
                 products[productIndex] = product;
                 saveProductsToLocalStorage(products);
+                localStorage.setItem('confirmationMessage', 'Product Updated successfully!');
+                localStorage.setItem('confirmationMessageType', 'success');
                 window.location.href = 'index.html';
             };
             reader.readAsDataURL(imageInput.files[0]);
         } else {
             products[productIndex] = product;
             saveProductsToLocalStorage(products);
+            localStorage.setItem('confirmationMessage', 'Product Updated successfully!');
+            localStorage.setItem('confirmationMessageType', 'success');
             window.location.href = 'index.html';
         }
     }
 }
 
 /**
- * Deletes a product from the local storage and updates the product list.
- *
- * @param {number} productId - The ID of the product to be deleted.
+ * Deletes a product by its ID after user confirmation.
+ * 
+ * This function prompts the user for confirmation before deleting the product.
+ * If confirmed, it retrieves the list of products from local storage, filters out
+ * the product with the specified ID, saves the updated list back to local storage,
+ * sets a confirmation message, and reloads the page.
+ * 
+ * @param {string} productId - The ID of the product to be deleted.
  */
 export function deleteProduct(productId) {
     if (confirm('Are you sure you want to delete this product?')) {
         const products = getProductsFromLocalStorage();
         const updatedProducts = products.filter(product => product.id !== productId);
         saveProductsToLocalStorage(updatedProducts);
+        localStorage.setItem('confirmationMessage', 'Product deleted successfully!');
+        localStorage.setItem('confirmationMessageType', 'delete');
         renderProducts();
+        window.location.reload();
     }
 }
 
 /**
  * Populates the edit form with the details of the product with the given ID.
  *
- * @param {string} productId - The ID of the product to be edited.
+ * @param {string} productId - The ID of the product to edit.
  */
 export function populateEditForm(productId) {
     const products = getProductsFromLocalStorage();
